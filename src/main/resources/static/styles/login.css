@@ -1,0 +1,32 @@
+div{
+    width : 35%;
+    margin: 5em auto;
+    border-radius : 1em;
+    border: 1px black solid;
+    text-align: center;
+}
+
+p{
+    color : white;
+    width: 200px;
+    border-radius : 1em;
+    background-color: #4CAF50;
+    padding: 1em;
+    margin: 2em auto;
+
+}
+
+input{
+    padding: 12px 20px;
+    margin: 12px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit]{
+    color: white;
+    background-color: #336bff;
+    margin : 3em auto;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link th:href="@{/styles/login.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div>
+        <p>Pay My Buddy</p>
+        <form>
+            <input type="text" id="email" name="email"  placeholder="Email"><br>
+            <input type="text" id="password" name="password"  placeholder="Password"><br>
+            <input type="checkbox" id="remember" name="remember_me" value="Remember Me">
+            <label for="remember">Remember Me</label><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
