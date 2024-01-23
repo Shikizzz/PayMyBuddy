@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link th:href="@{/styles/login.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div>
+        <h1>Pay My Buddy</h1>
+        <p th:if="${registerError}" class="error">Email already taken. Use another or go to Login page.</p>
+        <p th:if="${passwordError}" class="error">Password must have at least 6 characters.</p>
+        <p th:if="${confirmError}" class="error">Your password and confirmation doesn't match.</p>
+        <form method="post" modelAttribute="profile" th:action="@{/register}" th:object="${Profile}">
+            <input type="email" id="email" name="email" path="*{email}" placeholder="Email"><br>
+            <input type="text" id="lastName" name="lastName" path="*{lastName}" placeholder="Lastname" required><br>
+            <input type="text" id="firstName" name="firstName" path="*{firstName}" placeholder="Firstname" required><br>
+            <input type="password" id="password" name="password" path="*{password}" placeholder="Password"><br>
+            <input type="password" id="confirm" name="confirm" path="*{confirm}" placeholder="Confirm password"><br>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link th:href="@{/styles/profile.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div th:insert="navbar :: navbar">  </div>
+    <div class="profile">
+        <h1 class="page_title">Your Profile</h1>
+        <p class="info" th:text="|Email : ${email}|"></p>
+        <p class="info" th:text="|Last Name : ${lastname}|"></p>
+        <p class="info" th:text="|First Name : ${firstname}|"></p>
+        <div class="buttons">
+            <a class="modify" th:href="@{/editProfile}">Edit profile </a>
+            <a class="modify" th:href="@{/editPassword}">Change password</a>
+        </div>
+    </div>
+</body>
+</html>

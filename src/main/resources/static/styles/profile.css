@@ -1,0 +1,130 @@
+/* Navbar */
+
+body{
+    margin:0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.navbar {
+   width: 100%;
+   height: min-content;
+   margin:2px;
+   padding: 0;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color : white;
+    border-radius : 0.5em;
+    background: linear-gradient(to right, #35ac39, #37cc3c);
+    background-color: #4CAF50;
+    font-size: 1.3em;
+    padding : 0.6em;
+    margin: 0;
+}
+.navbar_links {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    list-style: none;
+}
+.navbar_links li{
+    margin: 0 2em;
+    cursor: pointer;
+}
+.navbar_links a{
+    color: black;
+    font-size : 1.3em;
+    text-decoration: none;
+}
+#profile{
+    color: #588aed;
+}
+
+/* Main Page */
+
+
+.profile{
+    width : 30%;
+    height : 75%;
+    margin: 5em auto;
+    text-align: center;
+    font-size: 1.3em;
+
+}
+
+.page_title{
+    color : white;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 50%;
+    border-radius : 0.5em;
+    background: linear-gradient(to right, #35ac39, #37cc3c);
+    background-color: #4CAF50;
+    padding: 1em;
+    margin: 2em auto;
+    font-size: 1.4em;
+}
+
+a{
+    text-decoration: none;  /*doesn't work*/
+}
+
+.buttons{
+    padding-top: 0.5em;
+    text-align: center;
+    display: block;
+}
+
+.modify{
+    display: block;
+    width: fit-content;
+    color: white;
+    border-radius : 0.2em;
+    background-color: #3b68d9;
+    margin : 0.7em auto;
+    padding: 0.3em;
+}
+
+.modify:hover{
+    background-color: #588aed;
+    cursor: pointer;
+}
+
+/* Modify Profile page */
+
+.error{
+    color : red;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+
+input{
+    padding: 12px 20px;
+    margin: 12px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.4em;
+}
+#email, #password, #lastName, #firstName, #confirm {
+    width : 90%;
+}
+
+label{
+    font-size: 1.4em;
+}
+
+input[type=submit]{
+    width : 28%;
+    color: white;
+    border-radius : 0.5em;
+    background-color: #3b68d9;
+    margin : 3em auto;
+    font-size: 1.4em;
+}

@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>My transfers</title>
+    <title>Pay My Buddy</title>
+    <link th:href="@{/styles/transfer.css}" rel="stylesheet"/>
 </head>
 <body>
+    <div th:insert="navbar :: navbar">  </div>
+    <div class="path_div">
+        <ul class="path_list">
+            <li id="home">Home</li>
+            <li id="slash">/</li>
+            <li id="transfer_path">Transfer</li>
+        </ul>
+    </div>
 
+    <div class="page_container">
+        <div class="send_money">
+            <p>Send Money</p>
+            <a class="add_connection" th:href="contact">Add Connection</a>
+        </div>
+        <div class="transfers">
+            <ul>
+                <li>X</li>
+                <li>X</li>
+                <li>X</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

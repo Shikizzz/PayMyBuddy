@@ -11,23 +11,27 @@ import java.util.Date;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Id")
+    @Column(name="id_transaction")
     private int id_transaction;
 
-    @Column(name="Description")
+    @Column(name="description")
     private String description;
 
-    @Column(name="Amount")
+    @Column(name="amount")
     private double amount;
 
-    @Column(name="Date")
+    @Column(name="date")
     private Date date;
 
-    @ManyToOne
-    //@JoinColumn(name= "source")
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(name="transaction_source") //unidirectional
     private User source;
 
-    @ManyToOne
-    //@JoinColumn()
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(name="transaction_target") //bidirectional
     private User target;
 }
