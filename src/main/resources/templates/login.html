@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
     <link th:href="@{/styles/login.css}" rel="stylesheet"/>
 </head>
 <body>
-    <div>
-        <h1>Pay My Buddy</h1>
+    <div class="page_container border">
+        <h1 class="title">Pay My Buddy</h1>
         <p th:if="${loginError}" class="error">Wrong Email or Password</p>
         <form method="post" modelAttribute="loginModel" th:action="@{/login}" th:object="${loginModel}" >
             <input type="email" id="email" name="email" path="*{email}" placeholder="Email"><br>

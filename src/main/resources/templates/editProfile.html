@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet"/>
     <link th:href="@{/styles/profile.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:insert="navbar :: navbar">  </div>
-<div class="profile">
-    <h1 class="page_title">Modify Profile</h1>
+<div class="page_container">
+    <h1 class="title">Modify Profile</h1>
     <p th:if="${passwordError}" class="error">Incorrect Password</p>
     <form method="post" modelAttribute="ModifyProfile" th:action="@{/editProfile}" th:object="${ModifyProfile}">
         <input class= "info" type="email" id="email" name="email" path="*{email}"th:value="${email}"/>

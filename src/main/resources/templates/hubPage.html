@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
     <link th:href="@{/styles/hub.css}" rel="stylesheet"/>
 </head>
 <body>
-<div class="container">
-    <h1 class="title">Pay My Buddy</h1>
-    <a class="menu" th:href="@{/transfer}"> Transfer </a>
-    <a class="menu" th:href="@{/profile}"> Profile </a>
-    <a class="menu" th:href="@{/contact}"> Contact </a>
-    <a class="logout" th:href="@{/login}"> Log off </a>
-</div>
+    <div class="page_container">
+        <h1 class="title">Pay My Buddy</h1>
+        <a class="menu" th:href="@{/transfer}"> Transfer </a>
+        <a class="menu" th:href="@{/profile}"> Profile </a>
+        <a class="menu" th:href="@{/contact}"> Contact </a>
+        <a class="logout" th:href="@{/logout}"> Log off </a>
+    </div>
 </body>
 </html>

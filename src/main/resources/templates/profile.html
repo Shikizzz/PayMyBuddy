@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet"/>
     <link th:href="@{/styles/profile.css}" rel="stylesheet"/>
 </head>
 <body>
     <div th:insert="navbar :: navbar">  </div>
-    <div class="profile">
-        <h1 class="page_title">Your Profile</h1>
+    <div class="page_container">
+        <h1 class="title">Your Profile</h1>
         <p class="info" th:text="|Email : ${email}|"></p>
         <p class="info" th:text="|Last Name : ${lastname}|"></p>
         <p class="info" th:text="|First Name : ${firstname}|"></p>

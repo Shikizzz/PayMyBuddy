@@ -1,22 +1,18 @@
 package com.p6.payMyBuddy.controllers;
 
-import com.p6.payMyBuddy.model.DTO.ChangePassword;
 import com.p6.payMyBuddy.model.DTO.LoginModel;
-import com.p6.payMyBuddy.model.DTO.ModifyProfile;
 import com.p6.payMyBuddy.model.DTO.Profile;
-import com.p6.payMyBuddy.model.Transaction;
 import com.p6.payMyBuddy.model.User;
 import com.p6.payMyBuddy.services.UserService;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class LoginController extends HttpServlet {
@@ -26,50 +22,48 @@ public class LoginController extends HttpServlet {
         this.userService = userService;
     }
     @GetMapping("/")
-    public String home() {
-        return "login";
+    public String home(HttpSession session) {
+        return "redirect:hubPage";
     }
     @GetMapping("/login")
-    public String home2(HttpSession session) {
-        session.invalidate();
-        return "login";
+    public String getLogin(HttpSession session) {
+        return "login.html";
     }
-
+    @GetMapping("/logout")
+    public String getLogout(HttpSession session) {
+        session.invalidate();
+        return "redirect:login";
+    }
+    @Transactional
     @PostMapping("/login")
-    public String submit(@ModelAttribute (name="loginModel") LoginModel loginModel, BindingResult result, Model model, HttpSession session){
+    public String postLogin(@ModelAttribute (name="loginModel") LoginModel loginModel, BindingResult result, Model model, HttpSession session){
         if (result.hasErrors()) {
             return "error";
         }
         User userInDB = userService.getUser(loginModel.getEmail()); //getting Email and password in DB, if User exists
         if(userInDB != null){
             if (userService.checkPassword(loginModel.getPassword(), userInDB.getPassword())) { //check password
-                session.setAttribute("email", userInDB.getEmail());
-                session.setAttribute("lastname", userInDB.getLastName());
-                session.setAttribute("firstname", userInDB.getFirstName());
-                session.setAttribute("password", userInDB.getPassword());
-                session.setAttribute("balance", userInDB.getBalance());
-                session.setAttribute("connections", userInDB.getConnections());
-                session.setAttribute("transactions", userInDB.getTransactions());
-                return "hubPage";
+                session.setAttribute("user", userInDB);
+                return "redirect:hubPage";
             }
             else{
                 model.addAttribute("loginError", true);
-                return "login";
+                return "login.html";
             }
         }
         else{
             model.addAttribute("loginError", true);
-            return "login";
+            return "login.html";
         }
-    } //+httpsession ?
+    }
 
     @GetMapping("/register")
-    public String register() {
-        return "register";
+    public String getRegister() {
+        return "register.html";
     }
 
     @PostMapping("/register")
-    public String submit(@ModelAttribute (name="profile") Profile profile, BindingResult result, Model model){
+    public String postRegister(@ModelAttribute (name="profile") Profile profile, BindingResult result, Model model, HttpSession session){
         if (result.hasErrors()) {
             return "error";
         }
@@ -91,68 +85,8 @@ public class LoginController extends HttpServlet {
         user.setFirstName(profile.getFirstName());
         user.setPassword(profile.getPassword());
         user.setBalance(0.0);
-        userService.saveUser(user);   //TODO: add HttpSession or redirect to login
-        return "hubPage";
-
-    }
-
-
-
-    @GetMapping("/editProfile")
-    public String getEditProfile(Model model, HttpSession session) {
-        model.addAttribute("email", session.getAttribute("email"));
-        model.addAttribute("lastname", session.getAttribute("lastname"));
-        model.addAttribute("firstname", session.getAttribute("firstname"));
-        model.addAttribute("password", session.getAttribute("password"));
-        return "editProfile.html";
-    }
-
-    @PostMapping("/editProfile")
-    public String postEditProfile(@ModelAttribute (name="ModifyProfile") ModifyProfile profile, BindingResult result, Model model, HttpSession session) {
-        if(userService.checkPassword(profile.getPassword(), (String) session.getAttribute("password"))){
-            User user = new User();
-            user.setEmail(profile.getEmail());
-            user.setLastName(profile.getLastName());
-            user.setFirstName(profile.getFirstName());
-            user.setPassword(profile.getPassword());
-            user.setBalance((Double) session.getAttribute("balance"));
-            user.setConnections((List<User>) session.getAttribute("connections"));
-            user.setTransactions((List<Transaction>) session.getAttribute("transactions"));
-            userService.saveUser(user);
-            return "hubPage.html"; //TODO: update HttpSession
-        }
-        model.addAttribute("passwordError",  true);
-        return "editProfile.html";
-    }
-
-    @GetMapping("/editPassword")
-    public String getEditPassword(Model model, HttpSession session) {
-        return "editPassword.html";
-    }
-
-    @PostMapping("/editPassword")
-    public String postEditPassword(@ModelAttribute (name="changePassword")ChangePassword changePassword, BindingResult result, Model model, HttpSession session) {
-        if(!userService.checkPassword(changePassword.getOldPassword(), (String) session.getAttribute("password"))){
-            model.addAttribute("oldPasswordError",  true);
-            return "editPassword.html";
-        }
-        if(changePassword.getNewPassword().length()<6){
-            model.addAttribute("passwordLengthError",  true);
-            return "editPassword.html";
-        }
-        if(!changePassword.getNewPassword().equals(changePassword.getConfirmNewPassword())){
-            model.addAttribute("passwordMatchError",  true);
-            return "editPassword.html";
-        }
-        User user = new User();
-        user.setEmail((String) session.getAttribute("email"));
-        user.setLastName((String) session.getAttribute("lastname"));
-        user.setFirstName((String) session.getAttribute("firstname"));
-        user.setPassword(changePassword.getNewPassword());
-        user.setBalance((Double) session.getAttribute("balance"));
-        user.setConnections((List<User>) session.getAttribute("connections"));
-        user.setTransactions((List<Transaction>) session.getAttribute("transactions"));
         userService.saveUser(user);
-        return "hubPage.html"; //TODO: update HttpSession
+        session.setAttribute("user", user);
+        return "redirect:hubPage";
     }
 }

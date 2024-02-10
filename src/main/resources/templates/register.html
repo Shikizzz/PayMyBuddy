@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
     <link th:href="@{/styles/login.css}" rel="stylesheet"/>
 </head>
 <body>
-    <div>
-        <h1>Pay My Buddy</h1>
+    <div class="page_container">
+        <h1 class="title">Pay My Buddy</h1>
         <p th:if="${registerError}" class="error">Email already taken. Use another or go to Login page.</p>
         <p th:if="${passwordError}" class="error">Password must have at least 6 characters.</p>
         <p th:if="${confirmError}" class="error">Your password and confirmation doesn't match.</p>

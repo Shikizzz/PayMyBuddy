@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/contact.css}" rel="stylesheet"/>
 </head>
 <body>
+    <div th:insert="navbar :: navbar">  </div>
+    <p th:if="${loginError}" class="error">Wrong Email</p>
+    <div class="page_container">
+        <div>
+            <h1 class="title">My Contacts</h1>
+            <form method="post" modelAttribute="email" th:action="@{/contact}" th:object="${String}">
+                <p th:if="${notFoundError}" class="error">User not found</p>
+                <p th:if="${alreadyFriendError}" class="error">You already have this user in your contacts</p>
+                <input type="email" name="email" path="*{email}" placeholder="Enter person's Email"><br>
+                <input type="submit" value="Add Connection">
+            </form>
+        </div>
+        <div class="table_container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="connection, iStat : ${connectionsPage.content}"
+                    th:class="${iStat.even}? 'even_row'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+                    <td th:text="${connection.email}" />
+                    <td th:text="${connection.firstName}" />
+                    <td th:text="${connection.lastName}" />
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${connectionsPage.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/contact(size=${connectionsPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==connectionsPage.number + 1} ? active"></a>
+            </div>
 
+
+
+
+ <!--           <table>
+                <tr>
+                    <th>Email</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                </tr>
+                <tr th:each="user : ${connections}">
+                    <td><span th:text="${user.firstName}"> FirstName </span></td>
+                    <td><span th:text="${user.firstName}"> FirstName </span></td>
+                    <td><span th:text="${user.lastName}"> LastName </span></td>
+                </tr>
+            </table>-->
+        </div>
+    </div>
 </body>
 </html>

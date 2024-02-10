@@ -1,45 +1,4 @@
-body{
-    margin:0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.navbar {
-   width: 100%;
-   height: min-content; /* problem here */
-   margin:2px;
-   padding: 0;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-}
-.title {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color : white;
-    border-radius : 0.5em;
-    background: linear-gradient(to right, #35ac39, #37cc3c);
-    background-color: #4CAF50;
-    font-size: 1.3em;
-    padding : 0.6em;
-    margin: 0;
-}
-.navbar_links {
-    flex: 1;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    list-style: none;
-}
-.navbar_links li{
-    margin: 0 2em;
-    cursor: pointer;
-}
-.navbar_links a{
-    color: black;
-    font-size : 1.3em;
-    text-decoration: none;
-}
+
 #transfer{
     color: #588aed;
 }
@@ -48,6 +7,7 @@ body{
     padding : 1em;
     background-color: #eeeeee;
 }
+
 .path_list{
     margin: 0;
     flex: 1;

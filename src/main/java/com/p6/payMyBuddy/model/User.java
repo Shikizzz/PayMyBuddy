@@ -29,10 +29,9 @@ public class User {
     private Double balance;
 
     @ManyToMany(
-            fetch = FetchType.LAZY,  //we will have to use @Transactional when accessing connections attribute
+            fetch = FetchType.EAGER,  //we will have to use @Transactional when accessing connections attribute
             cascade = {
                     CascadeType.PERSIST,
-                    CascadeType.MERGE
             }
     )
     @JoinTable(
@@ -42,7 +41,8 @@ public class User {
     )
     private List<User> connections = new ArrayList<>();
 
-    @OneToMany( //we will have to use @Transactional when accessing transactions attribute, because fetch = LAZY by default
+    @OneToMany(
+            fetch = FetchType.EAGER,
             mappedBy = "target"
     )
     List<Transaction> transactions = new ArrayList<>();
