@@ -47,7 +47,6 @@ public class User {
                     CascadeType.MERGE
             }
     )
-    //@ToString.Exclude
     List<Transaction> transactionsSource = new ArrayList<>();
 
     @OneToMany(
@@ -58,8 +57,7 @@ public class User {
                     CascadeType.MERGE
             }
     )
-    //@ToString.Exclude
-    List<Transaction> transactionsTarget = new ArrayList<>();
+    private List<Transaction> transactionsTarget = new ArrayList<>();
 
     public void addTransaction(Transaction transaction) { //helper
         transactionsSource.add(0, transaction);
