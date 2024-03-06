@@ -16,8 +16,8 @@ This project does not include :
 - Calls to Bank APIs
 
 
-UML diagramm for Model classes : docs/Widemann_Simon_1_uml_012024.PNG
+[UML diagramm for Model classes](docs/Widemann_Simon_1_uml_012024.PNG)
 
-Data Model :  docs/Widemann_Simon_2_mpd_012024.PNG
+[Data Model](docs/Widemann_Simon_2_mpd_012024.PNG)
 
-MySQL scripts : docs/Widemann_Simon_3_scripts_012024.sql
+[MySQL scripts](docs/Widemann_Simon_3_scripts_012024.sql)
