@@ -1,0 +1,41 @@
+table{
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #4CAF50;
+    font-size: 1.1em;
+    color: white;
+    padding: 0.8em;
+}
+
+td{
+    width: 33%;
+    font-size: 1.1em;
+    padding: 0.5em;
+}
+
+.pagination{
+    display : inline;
+    padding: 0.7em;
+    border: 1px solid #ccc;
+}
+
+.left{
+    border-radius: 10% 0% 0% 10%;
+}
+
+.right{
+    border-radius: 0% 10% 10% 0%;
+}
+
+.pages{
+    display: inline-block;
+    margin-top: 0.75em;
+}
+
+.even_row{
+    background-color: #eeeeee;
+}

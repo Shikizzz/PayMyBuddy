@@ -1,19 +1,7 @@
-div{
-    width : 35%;
-    margin: 5em auto;
-    border-radius : 1em;
-    border: 1px black solid;
-    text-align: center;
-}
 
-p{
-    color : white;
-    width: 200px;
-    border-radius : 1em;
-    background-color: #4CAF50;
-    padding: 1em;
-    margin: 2em auto;
-
+.border{
+    border: 1px solid;
+    border-radius: 10px;
 }
 
 input{
@@ -23,10 +11,33 @@ input{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 1.4em;
 }
 
-input[type=submit]{
+#email, #password, #lastName, #firstName, #confirm {
+    width : 90%;
+}
+
+label{
+    font-size: 1.4em;
+}
+
+input[type=checkbox] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 0.15em;
+    }
+
+.button{
+    width : 28%;
     color: white;
-    background-color: #336bff;
-    margin : 3em auto;
+    border-radius : 0.5em;
+    background-color: #3b68d9;
+    margin : 2.5em auto;
+    font-size: 1.4em;
+}
+
+.button:hover{
+    background-color: #588aed;
+    cursor: pointer;
 }

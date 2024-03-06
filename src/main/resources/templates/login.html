@@ -2,18 +2,20 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
     <link th:href="@{/styles/login.css}" rel="stylesheet"/>
 </head>
 <body>
-    <div>
-        <p>Pay My Buddy</p>
-        <form>
-            <input type="text" id="email" name="email"  placeholder="Email"><br>
-            <input type="text" id="password" name="password"  placeholder="Password"><br>
-            <input type="checkbox" id="remember" name="remember_me" value="Remember Me">
+    <div class="page_container border">
+        <h1 class="title">Pay My Buddy</h1>
+        <p th:if="${loginError}" class="error">Wrong Email or Password</p>
+        <form method="post" modelAttribute="loginModel" th:action="@{/login}" th:object="${loginModel}" >
+            <input type="email" id="email" name="email" path="*{email}" placeholder="Email"><br>
+            <input type="password" id="password" name="password" path="*{password}"  placeholder="Password"><br>
+            <input type="checkbox" id="remember" name="remember" th:checked="${remember}"/>
             <label for="remember">Remember Me</label><br>
-            <input type="submit" value="Login">
+            <input class="button" type="submit" value="Login">
         </form>
     </div>
 </body>

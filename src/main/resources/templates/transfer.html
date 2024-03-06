@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>My transfers</title>
+    <title>Pay My Buddy</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/transfer.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/tables.css}" rel="stylesheet"/>
 </head>
 <body>
+    <div th:insert="navbar :: navbar">  </div>
+    <div class="path_div">
+        <ul class="path_list">
+            <li id="home">Home</li>
+            <li id="slash">/</li>
+            <li id="path">Transfer</li>
+        </ul>
+    </div>
 
+    <div class="page_container">
+        <div class="section_title_div">
+            <p class="section_title">Send Money</p>
+            <a class="add_connection" th:href="contact">Add Connection</a>
+        </div>
+        <div class="transfers">
+            <form class="pay" method="post" modelAttribute="sendMoneyDTO" th:action="@{/transfer}" th:object="${sendMoneyDTO}">
+                <select  class="select_input" name="email" path="*{email}" required>
+                    <option value="0">Select A Connection</option>
+                    <option th:each="option : ${usersList}" th:value="${option}" th:text="${option}">
+                    </option>
+                </select>
+                <input  class="description" type="text" name="description" path="*{description}" placeholder="Enter Description"/>
+                <input  class="amount_input" type="number" name="amount" path="*{amount}" value="0" min="0.01" step="any"/>
+                <input class="green_button" type="submit" value="Pay">
+            </form>
+            <p th:if="${balanceError}" class="error">You don't have enough money for the transaction</p>
+        </div>
+
+        <div class="section_title_div">
+            <p class="section_title" id="my_transactions">My Transactions</p>
+        </div>
+        <div class="table_container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Connections</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="transaction, iStat : ${transactionsPage.content}"
+                    th:class="${iStat.even}? 'even_row'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+                    <td th:text="${transaction.connection}" />
+                    <td th:text="${transaction.description}" />
+                    <td th:text="${transaction.amount}" />
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${transactionsPage.totalPages > 0}" class="pagination left">
+                <a class="pages" th:href="@{/transfer(size=${transactionsPage.size}, page= ${transactionsPage.number>0} ? ${transactionsPage.number} : ${1})}"><<</a>
+            </div>
+            <div th:if="${transactionsPage.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a class="pages" th:href="@{/transfer(size=${transactionsPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==transactionsPage.number + 1} ? active"></a>
+            </div>
+            <div th:if="${transactionsPage.totalPages > 0}" class="pagination right">
+                <a class="pages" th:href="@{/transfer(size=${transactionsPage.size}, page= ${transactionsPage.number<(transactionsPage.totalPages-1)} ? ${transactionsPage.number+2} : ${transactionsPage.totalPages})}">>></a>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
