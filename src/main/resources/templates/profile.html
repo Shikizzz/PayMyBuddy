@@ -9,15 +9,45 @@
 </head>
 <body>
     <div th:insert="navbar :: navbar">  </div>
+    <div class="path_div">
+        <ul class="path_list">
+            <li id="home">Home</li>
+            <li id="slash">/</li>
+            <li id="path">Profile</li>
+        </ul>
+    </div>
+
     <div class="page_container">
-        <h1 class="title">Your Profile</h1>
-        <p class="info" th:text="|Email : ${email}|"></p>
-        <p class="info" th:text="|Last Name : ${lastname}|"></p>
-        <p class="info" th:text="|First Name : ${firstname}|"></p>
-        <div class="buttons">
-            <a class="modify" th:href="@{/editProfile}">Edit profile </a>
-            <a class="modify" th:href="@{/editPassword}">Change password</a>
+        <div class="section_title_div">
+            <p class="section_title">Your Profile</p>
         </div>
+        <div class="grey_div">
+            <p class="profile_info" id="first_input" th:text="|Email : ${email}|"></p>
+            <p class="profile_info" th:text="|Last Name : ${lastname}|"></p>
+            <p class="profile_info" th:text="|First Name : ${firstname}|"></p>
+            <div class="buttons">
+                <a class="modify" th:href="@{/editProfile}">Edit profile </a>
+                <a class="modify" th:href="@{/editPassword}">Change password</a>
+            </div>
+        </div>
+
+        <div class="section_title_div">
+            <p class="section_title"> <span th:text="|Your balance : ${balance}"></span> <span> &#x20AC;</span></p>
+        </div>
+        <div class="grey_div">
+            <form class="balance_form" method="post" modelAttribute="doubleDTO" th:action="@{/profile-addBalance}" th:object="${DoubleDTO}">
+                <label>Fund your balance :</label>
+                <input class="amount_input" type="number" name="amount" path="*{amount}" value="0" min="0.01" step="any"/>
+                <input class="add" type="submit" value="Add">
+            </form>
+            <p th:if="${balanceError}" class="error">You don't have enough money</p>
+            <form class="balance_form" method="post" modelAttribute="doubleDTO" th:action="@{/profile-retrieveBalance}" th:object="${DoubleDTO}">
+                <label>Retrieve money :</label>
+                <input class="amount_input" type="number" name="amount" path="*{amount}" value="0" min="0.01" step="any"/>
+                <input class="add" type="submit" value="Retrieve">
+            </form>
+        </div>
+
     </div>
 </body>
 </html>

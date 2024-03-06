@@ -27,7 +27,7 @@
 #slash{
     color: #588aed;
 }
-#transfer_path{
+#path{
     color : #999999;
 }
 
@@ -36,29 +36,81 @@
     margin:auto;
     margin-top: 1em;
 }
-.send_money{
+
+.section_title_div{
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size : 1.3em;
+    margin: 1.5em 0em 0.3em 0em;
     }
+
 .add_connection{
-    padding : 0.8em 1.5em;
-    background-color: #588aed;
+    padding : 0.3em 2em;
+    background-color: #3b68d9;
     color: white;
     border-radius : 0.5em;
     text-decoration: none;
 }
 
+.add_connection:hover{
+    background-color: #588aed;
+    cursor: pointer;
+}
+
 .transfers{
     background-color: #eeeeee;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
 }
+
 .transfers ul{
     list-style: none;
     display: flex;
     justify-content: space-between;
 }
+
+.section_title{
+    margin: auto 0;
+}
+
+#my_transactions{
+    margin: 0.3em 0;
+}
+
+.pay{
+    display: flex;
+    justify-content: space-around;
+    padding: 3em;
+    align-items: center;
+}
+
+.select_input{
+    height : 3em;
+    width : 25%;
+    background-color: white;
+}
+
+.description{
+    height : 2.5em;
+    width : 25%
+}
+
+.amount_input{
+    height : 2.5em;
+    width : 10%%
+}
+
+.green_button{
+    height : 2em;
+    color : white;
+    border-radius : 0.5em;
+    background-color: #4CAF50;
+    font-size: 1.1em;
+    padding : 0 3.5em;
+}
+
+.green_button:hover{
+    background-color: #6ada57;
+    cursor:pointer;
+}
+

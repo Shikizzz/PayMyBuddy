@@ -13,9 +13,9 @@
         <form method="post" modelAttribute="loginModel" th:action="@{/login}" th:object="${loginModel}" >
             <input type="email" id="email" name="email" path="*{email}" placeholder="Email"><br>
             <input type="password" id="password" name="password" path="*{password}"  placeholder="Password"><br>
-            <input type="checkbox" id="remember" name="remember_me" value="Remember Me">
+            <input type="checkbox" id="remember" name="remember" th:checked="${remember}"/>
             <label for="remember">Remember Me</label><br>
-            <input type="submit" value="Login">
+            <input class="button" type="submit" value="Login">
         </form>
     </div>
 </body>

@@ -1,15 +1,14 @@
 package com.p6.payMyBuddy.services;
 
-import com.p6.payMyBuddy.model.DTO.Connection;
+import com.p6.payMyBuddy.model.Transaction;
 import com.p6.payMyBuddy.model.User;
 import com.p6.payMyBuddy.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +16,7 @@ public class UserService {
 
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
@@ -43,6 +43,12 @@ public class UserService {
     public void updateUser(User user){
         userRepository.save(user);
     }
+
+    @Transactional
+    public void removeUser(User user){
+        userRepository.delete(user);
+    }
+
     public Boolean checkPassword(String input, String dataBase){
         return bCryptPasswordEncoder.matches(input, dataBase);
     }
@@ -53,6 +59,32 @@ public class UserService {
             usersEmail.add(users.get(i).getEmail());
         }
         return usersEmail;
+    }
+
+    public void addBalance(User user, double amount){ //For real app, call to bank API here
+        user.setBalance(user.getBalance()+amount);
+        updateUser(user);
+    }
+
+    public void removeBalance(User user, double amount){ //For real app, call to bank API here
+        user.setBalance(user.getBalance()-amount);
+        updateUser(user);
+    }
+    @Transactional
+    public void sendMoney(User sourceUser, String targetEmail, double amount, String description){
+        User targetUser = getUser(targetEmail);
+        sourceUser.setBalance(sourceUser.getBalance()-amount);
+        targetUser.setBalance(targetUser.getBalance()+(amount*0.995));//For real app, call to bank API here
+        //take (0.005)*amount for PayMyBuddy account here, with calls to bank API
+        Transaction transaction = new Transaction();
+        transaction.setDescription(description);
+        transaction.setAmount(amount);
+        transaction.setDate(LocalDateTime.now());
+        transaction.setSource(sourceUser);
+        transaction.setTarget(targetUser);
+        sourceUser.addTransaction(transaction);
+        updateUser(sourceUser);
+        updateUser(targetUser);
     }
 
 }

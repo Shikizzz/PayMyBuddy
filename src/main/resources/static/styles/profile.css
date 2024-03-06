@@ -1,8 +1,63 @@
 #profile{
     color: #588aed;
 }
+
+.path_div{
+    padding : 1em;
+    background-color: #eeeeee;
+}
+
+.path_list{
+    margin: 0;
+    flex: 1;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    list-style: none;
+}
+
+.path_list li{
+    margin: 0 1em;
+    font-size : 1.3em;
+}
+#home{
+    color: #588aed;
+}
+#slash{
+    color: #588aed;
+}
+#path{
+    color : #999999;
+}
+
+.page_container{
+    width:50%;
+    margin:auto;
+    margin-top: 1em;
+}
+
+.section_title_div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size : 1.3em;
+    margin: 1.5em 0em 0.3em 0em;
+    }
+
+.section_title{
+    margin: auto 0;
+}
+
+.grey_div{
+    background-color: #eeeeee;
+    padding: 1em;
+}
+
+#first_input{
+    margin: 0 auto;
+}
+
 .buttons{
-    padding-top: 0.5em;
     text-align: center;
     display: block;
 }
@@ -12,10 +67,10 @@
     width: fit-content;
     color: white;
     background-color: #3b68d9;
-    font-size: 1.2em;
+    font-size: 1.1em;
     border: 1px solid #ccc;
-    padding: 10px;
-    margin: 0.7em auto;
+    padding: 0.2em 1em;
+    margin: 0 auto 0.5em;
     border-radius: 0.3em;
 }
 
@@ -24,33 +79,63 @@
     cursor: pointer;
 }
 
+.profile_info{
+    margin: 1em auto;
+    font-size: 1.3em;
+}
+
 /* Modify Profile page */
 
-input{
+.info{
     padding: 12px 20px;
-    margin: 12px 0;
+    margin: 0.7em;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1.3em;
-}
-
-#email, #password, #lastName, #firstName, #confirm {
     width : 90%;
 }
 
-.info{
-    width : 90%;
-    margin: 1em auto;
-    font-size: 1.3em;
-}
-
-input[type=submit]{
+.apply_button{
     width : 28%;
     color: white;
     border-radius : 0.5em;
     background-color: #3b68d9;
-    margin : 3em auto;
+    margin : 1.5em auto;
+    padding: 0.4em;
     font-size: 1.3em;
+}
+
+
+/*  BALANCE RELATED  */
+
+label{
+    font-size: 1.2em;
+}
+
+.balance_form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8em;
+}
+
+.add{
+    color: white;
+    background-color: #3b68d9;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    padding: 0.2em 1em;
+    border-radius: 0.3em;
+}
+
+.add:hover{
+    background-color: #588aed;
+    cursor: pointer;
+}
+
+.amount_input{
+    margin: 0 3em;
+    height: 1.5em;
 }

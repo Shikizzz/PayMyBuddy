@@ -16,14 +16,17 @@ public class WebConfig implements WebMvcConfigurer {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ConnectionInterceptor());
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/styles/**")
                 .addResourceLocations("classpath:/static/styles/");
     }
+
 }

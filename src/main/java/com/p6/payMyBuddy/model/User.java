@@ -1,37 +1,35 @@
 package com.p6.payMyBuddy.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @DynamicUpdate
 @Table(name = "user")
 public class User {
     @Id
-    @Column (name = "email")
+    @Column(name = "email")
     private String email;
 
-    @Column (name = "password")
+    @Column(name = "password")
     private String password;
 
-    @Column (name = "firstname")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column (name = "lastname")
+    @Column(name = "lastname")
     private String lastName;
 
-    @Column (name = "balance")
-    private Double balance;
+    @Column(name = "balance")
+    private double balance;
 
     @ManyToMany(
-            fetch = FetchType.EAGER,  //we will have to use @Transactional when accessing connections attribute
+            fetch = FetchType.EAGER,
             cascade = {
-                    CascadeType.PERSIST,
+                    CascadeType.PERSIST
             }
     )
     @JoinTable(
@@ -43,18 +41,92 @@ public class User {
 
     @OneToMany(
             fetch = FetchType.EAGER,
-            mappedBy = "target"
+            mappedBy = "source",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
     )
-    List<Transaction> transactions = new ArrayList<>();
+    //@ToString.Exclude
+    List<Transaction> transactionsSource = new ArrayList<>();
 
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "target",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+    )
+    //@ToString.Exclude
+    List<Transaction> transactionsTarget = new ArrayList<>();
 
     public void addTransaction(Transaction transaction) { //helper
-        transactions.add(transaction);
+        transactionsSource.add(0, transaction);
         transaction.setSource(this);
     }
 
-    public void removeTransaction(Transaction transaction) { //helper
-        transactions.add(transaction);
-        transaction.setSource(null);
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public List<User> getConnections() {
+        return connections;
+    }
+
+    public void setConnections(List<User> connections) {
+        this.connections = connections;
+    }
+
+    public List<Transaction> getTransactionsSource() {
+        return transactionsSource;
+    }
+
+    public void setTransactionsSource(List<Transaction> transactionsSource) {
+        this.transactionsSource = transactionsSource;
+    }
+
+    public List<Transaction> getTransactionsTarget() {
+        return transactionsTarget;
+    }
+
+    public void setTransactionsTarget(List<Transaction> transactionsTarget) {
+        this.transactionsTarget = transactionsTarget;
     }
 }

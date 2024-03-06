@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ConnectionsService {
 
-    public Page<Connection> findPaginated(Pageable pageable, ArrayList<Connection> connections){
+    public Page<Connection> findPaginatedConnections(Pageable pageable, ArrayList<Connection> connections){
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -30,8 +30,6 @@ public class ConnectionsService {
         Page<Connection> connectionsPage = new PageImpl<Connection>(list, PageRequest.of(currentPage, pageSize), connections.size());
         return connectionsPage;
     }
-
-
 
 
 

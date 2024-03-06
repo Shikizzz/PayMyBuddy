@@ -22,7 +22,13 @@ label{
     font-size: 1.4em;
 }
 
-input[type=submit]{
+input[type=checkbox] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 0.15em;
+    }
+
+.button{
     width : 28%;
     color: white;
     border-radius : 0.5em;
@@ -31,8 +37,7 @@ input[type=submit]{
     font-size: 1.4em;
 }
 
-input[type=checkbox] {
-    vertical-align: middle;
-    position: relative;
-    bottom: 0.15em;
-    }
+.button:hover{
+    background-color: #588aed;
+    cursor: pointer;
+}

@@ -13,11 +13,11 @@
     <h1 class="title">Modify Profile</h1>
     <p th:if="${passwordError}" class="error">Incorrect Password</p>
     <form method="post" modelAttribute="ModifyProfile" th:action="@{/editProfile}" th:object="${ModifyProfile}">
-        <input class= "info" type="email" id="email" name="email" path="*{email}"th:value="${email}"/>
-        <input type="text" id="lastName" name="lastName" path="*{lastName}" th:value="${lastname}"/>
-        <input type="text" id="firstName" name="firstName" path="*{firstName}" th:value="${firstname}"/>
-        <input type="password" id="password" name="password" path="*{password}" placeholder="Password"/>
-        <input type="submit" value="Apply">
+        <input class="info" type="email" name="email" path="*{email}"th:value="${email}"/>
+        <input class="info" type="text" name="lastName" path="*{lastName}" th:value="${lastname}"/>
+        <input class="info" type="text" name="firstName" path="*{firstName}" th:value="${firstname}"/>
+        <input class="info" type="password" name="password" path="*{password}" placeholder="Password"/>
+        <input class="apply_button" type="submit" value="Apply">
     </form>
 </div>
 

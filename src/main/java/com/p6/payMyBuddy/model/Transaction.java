@@ -2,8 +2,9 @@ package com.p6.payMyBuddy.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -11,27 +12,30 @@ import java.util.Date;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_transaction")
+    @Column(name = "id_transaction")
     private int id_transaction;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="amount")
+    @Column(name = "amount")
     private double amount;
 
-    @Column(name="date")
-    private Date date;
+    @Column(name = "date")
+    private LocalDateTime date;
 
     @ManyToOne(
             fetch = FetchType.EAGER
     )
-    @JoinColumn(name="transaction_source") //unidirectional
+    @JoinColumn(name = "transaction_source")
+    @ToString.Exclude
     private User source;
 
     @ManyToOne(
             fetch = FetchType.EAGER
     )
-    @JoinColumn(name="transaction_target") //bidirectional
+    @JoinColumn(name = "transaction_target")
+    @ToString.Exclude
     private User target;
+
 }

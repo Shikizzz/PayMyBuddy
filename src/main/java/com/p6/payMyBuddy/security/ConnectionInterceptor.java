@@ -12,19 +12,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class ConnectionInterceptor implements HandlerInterceptor {
 
     private static Logger logger = LoggerFactory.getLogger(ConnectionInterceptor.class);
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info(request.getRequestURI());
-        /* final ResponseCookie responseCookie = ResponseCookie
-                .from("test", "test")
-                .secure(true)
-                .httpOnly(true)
-                .path("/")
-                .maxAge(12345)
-                .sameSite("None")
-                .build();
-        response.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());*/
-        if(!request.getRequestURI().equals("/login") && !request.getRequestURI().equals("/register") && !request.getRequestURI().equals("/error") &&!request.getRequestURI().contains(".css")) {
+        if (!request.getRequestURI().contains("/login") && !request.getRequestURI().contains("/register") && !request.getRequestURI().contains("/error") && !request.getRequestURI().contains(".css")) {
             HttpSession session = request.getSession();
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("/login");
